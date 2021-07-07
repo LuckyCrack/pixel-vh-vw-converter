@@ -5,91 +5,130 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="UTF-8">
   <link rel="stylesheet" href="style.css">
-  <title>Pixel PX to VH | VW Viewport conversion</title>
+  <script src="/anime/lib/anime.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,400;0,500;1,500;1,600&display=swap" rel="stylesheet"> 
+  <title>Pixel to Viewport Conversion</title>
 </head>
 
 <body>
   <header>
     <nav>
       <h1>
-        <a href="https://github.com/khaledkzy/pixel-vh-VW-converter">Pixel PX to VH VW Viewport conversion</a>
+        <a href="https://github.com/LuckyCrack/pixel-vh-VW-converter">Pixel to  Viewport Conversion</a>
       </h1>
     </nav>
   </header>
-
   <main>
     <!-- 1 -->
-    <div>
-      <span class="text">Convert From px to vh</span>
-      <br>
-      <input class="pixelToVH" type="number" onkeyup="pixelToVH(this.value);">
-      <br>
-      <span class="result" id="pixelToVH">Result</span>
-    </div>
-    <!-- 2 -->
-    <div>
-      <span class="text">Convert From px to VW</span>
-      <br>
-      <input class="pixelToVW" type="number" onkeyup="pixelToVW(this.value);">
-      <br>
-      <span class="result" id="pixelToVW">Result</span>
-    </div>
-    <!-- 3 -->
-    <div>
-      <span class="text">Convert From vh to px</span>
-      <br>
-      <input class="vhToPixel" type="number" onkeyup="vhToPixel(this.value);">
-      <br>
-      <span class="result" id="vhToPixel">Result</span>
-    </div>
-    <!-- 4 -->
-    <div>
-      <span class="text">Convert From VW to px</span>
-      <br>
-      <input class="vwToPixel" type="number" onkeyup="vwToPixel(this.value);">
-      <br>
-      <span class="result" id="vwToPixel">Result</span>
-    </div>
+    
+    <div class="crd">
+      
+      <div class="option_1st">
+        <input type="radio" id="r1_px" name="options_1" value="px" checked>
+        <label for="r1_px"><span>px</span></label>
+        <input type="radio" id="r1_vh" name="options_1" value="vh">
+        <label for="r1_vh"><span>vh</span></label>
+        <input type="radio" id="r1_vw" name="options_1" value="vw">
+        <label for="r1_vw"><span>vw</span></label>
+      </div> 
 
+      <input placeholder="0.00" size="4" id="cc1" value="0.00" onkeyup="convert(this.value, this.id)">
+
+      <div class="ssvg">
+        <svg xmlns="http://www.w3.org/2000/svg" width="5" height="458" viewBox="0 0 5 458">
+          <path id="Path_1" data-name="Path 1" d="M0,0V453" transform="translate(2.5 2.5)" fill="none" stroke="#a099e1" stroke-linecap="round" stroke-width="5"/>
+        </svg>
+      </div>
+
+      <input placeholder="0.00" size="4" id="cc2" value="0.00" onkeyup="convert(this.value, this.id)">
+
+      <div class="options_2nd">
+        <input type="radio" id="r2_px" name="options_2" value="px" checked>
+        <label for="r2_px"><span>px</span></label>
+        <input type="radio" id="r2_vh" name="options_2" value="vh">
+        <label for="r2_vh"><span>vh</span></label>
+        <input type="radio" id="r2_vw" name="options_2" value="vw">
+        <label for="r2_vw"><span>vw</span></label> 
+      </div>
+      
+    </div>
   </main>
 
-
-  <footer id="footer">
-    Copyright (c) 2018
-    <a href="https://khaledkzy.github.io/pixel-vh-vw-converter/">
-      <strong>Pixel PX to VH VW Viewport conversion</strong>
-    </a> / To view the
-    <a href="https://github.com/khaledkzy/pixel-vh-VW-converter">
-      <strong>Source Code</strong>
-    </a>
-  </footer>
 </body>
 
 <script>
-  function pixelToVH(value) {
-    return document.querySelector("#pixelToVH").innerHTML = `Result = ${(100 * value) / window.innerHeight}vh`;
-  }
-  function pixelToVW(value) {
-    return document.querySelector("#pixelToVW").innerHTML = `Result = ${(100 * value) / window.innerWidth}vw`;
-  }
-  function vhToPixel(value) {
-    return document.querySelector("#vhToPixel").innerHTML = `Result = ${(window.innerHeight * value) / 100}px`;
-  }
-  function vwToPixel(value) {
-    return document.querySelector("#vwToPixel").innerHTML = `Result = ${((window.innerWidth * value) / 100)}px`;
+    var id_was = "cc2"
+  function convert(value, id)
+  {
+
+    var r1_px = document.getElementById('r1_px')
+    var r1_vh = document.getElementById('r1_vh')
+    var r1_vw = document.getElementById('r1_vw')
+
+    var r2_px = document.getElementById('r2_px')
+    var r2_vh = document.getElementById('r2_vh')
+    var r2_vw = document.getElementById('r2_vw')
+
+    var res_val = "0.00"
+
+
+    if(r1_px.checked && r2_vh.checked)
+    {
+       res_val = ((100 * value) / window.innerHeight).toFixed(2);
+    }
+    if(r1_px.checked && r2_vw.checked)
+    {
+      res_val = ((100 * value) / window.innerWidth).toFixed(2);
+    }
+    if(r1_vh.checked && r2_px.checked)
+    {
+      res_val = ((window.innerHeight * value) / 100).toFixed(2);
+    }
+    if(r1_vw.checked && r2_px.checked)
+    {
+       res_val = ((window.innerWidth * value) / 100).toFixed(2);
+    }
+    if(r1_px.checked && r2_px.checked || r1_vw.checked && r2_vw.checked || r1_vh.checked && r2_vh.checked)
+    {
+       res_val = value;
+    }
+    if(r1_vw.checked && r2_vh.checked || r1_vh.checked && r2_vw.checked)
+    {
+       res_val = "Invalid";
+    }
+
+    if(id == "cc1")
+    {
+      document.querySelector("#cc2").value = res_val
+      id_was = "cc1"
+    }
+    else
+    {
+      if(id == 'cc2')
+      {
+        document.querySelector("#cc1").value = res_val
+        id_was = "cc1"
+      }
+    }
+
   }
 
   window.addEventListener('resize', updateMeasurements)
-  function updateMeasurements() {
-    const pixelToVHValue = document.querySelector('.pixelToVH').value
-    const pixelToVWValue = document.querySelector('.pixelToVW').value
-    const vhToPixelValue = document.querySelector('.vhToPixel').value
-    const vwToPixelValue = document.querySelector('.vwToPixel').value
-    pixelToVH(pixelToVHValue)
-    pixelToVW(pixelToVWValue)
-    vhToPixel(vhToPixelValue)
-    vwToPixel(vwToPixelValue)
+  
+  function updateMeasurements() 
+  {
+    if(id_was == "cc1")
+    {
+      convert(document.querySelector("#cc1").value,id_was)
+    }
+    
+    if(id_was == 'cc2')
+    {
+      convert(document.querySelector("#cc2").value,id_was)
+    }
   }
+
 
 </script>
 
